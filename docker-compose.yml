@@ -1,0 +1,36 @@
+version: "2"
+
+services:
+ minetest:
+  image: registry.rudin.io/x86/minetest:pandorabox
+  restart: always
+  ports:
+   - "30002:30000/udp"
+  depends_on:
+   - "postgres"
+  volumes:
+   - "./data/minetest:/data"
+   - "./data/minetest/debug.txt:/root/.minetest/debug.txt"
+  working_dir: /data
+  command: minetestserver --config /data/minetest.conf --world /data/world/ --quiet
+  logging:
+   options:
+    max-size: 50m
+
+ postgres:
+  image: postgres:10
+  restart: always
+  shm_size: '2gb'
+  environment:
+   POSTGRES_PASSWORD: enter
+  volumes:
+   - "./data/postgres-minetest:/var/lib/postgresql/data"
+  logging:
+   options:
+    max-size: 50m
+
+networks:
+ terminator:
+  external: true
+
+ 
