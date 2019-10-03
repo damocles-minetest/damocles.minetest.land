@@ -29,6 +29,23 @@ services:
    options:
     max-size: 50m
 
+ auth-proxy:
+  image: registry.rudin.io/x86/mt-auth-proxy:latest
+  restart: always
+
+ wiki:
+  image: registry.rudin.io/x86/php-pandorabox
+  restart: always
+  depends_on:
+   - "postgres"
+   - "auth-proxy"
+  volumes:
+   - "./data/wiki:/var/www/html/wiki"
+  logging:
+   options:
+    max-size: 50m
+
+
  mapserver:
   image: registry.rudin.io/x86/mapserver
   restart: always
@@ -51,6 +68,7 @@ services:
   restart: always
   depends_on:
    - mapserver
+   - wiki
   environment:
    VIRTUAL_PORT: 80
    VIRTUAL_HOST: damocles.minetest.land
