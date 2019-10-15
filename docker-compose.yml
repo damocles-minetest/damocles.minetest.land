@@ -18,13 +18,13 @@ services:
     max-size: 50m
 
  postgres:
-  image: postgres:10
+  image: postgres:11
   restart: always
   shm_size: '2gb'
   environment:
    POSTGRES_PASSWORD: enter
   volumes:
-   - "./data/postgres-minetest:/var/lib/postgresql/data"
+   - "./data/postgres:/var/lib/postgresql/data"
   logging:
    options:
     max-size: 50m
@@ -40,11 +40,10 @@ services:
    - "postgres"
    - "auth-proxy"
   volumes:
-   - "./data/wiki:/var/www/html/wiki"
+   - "./data/wiki:/var/www/html"
   logging:
    options:
     max-size: 50m
-
 
  mapserver:
   image: registry.rudin.io/x86/mapserver
@@ -56,16 +55,12 @@ services:
   volumes:
    - "./data/minetest/world:/minetest"
   working_dir: "/minetest"
+  labels:
+   com.centurylinklabs.watchtower.enable: "true"
   logging:
    options:
     max-size: 50m
 
- portainer:
-  image: portainer/portainer
-  restart: always
-  volumes:
-    - "/var/run/docker.sock:/var/run/docker.sock"
-    - "./data/portainer:/data"
 
  nginx:
   image: nginx
@@ -74,7 +69,6 @@ services:
    - default
   restart: always
   depends_on:
-   - portainer
    - mapserver
    - wiki
   environment:
