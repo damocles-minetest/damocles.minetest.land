@@ -99,6 +99,8 @@ services:
   depends_on:
    - mapserver
    - wiki
+   - webmail
+   - highscore
   environment:
    VIRTUAL_PORT: 80
    VIRTUAL_HOST: damocles.minetest.land
