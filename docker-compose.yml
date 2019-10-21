@@ -75,6 +75,12 @@ services:
    PGPASSWORD: enter
    PGPORT: 5432
 
+ webmail:
+  image: registry.rudin.io/x86/minetest-webmail
+  restart: always
+  depends_on:
+   - minetest
+
 
  nginx:
   image: nginx
