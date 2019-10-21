@@ -80,8 +80,8 @@ services:
   restart: always
   environment:
    IRC_HOST: chat.freenode.net
-   IRC_CHANNEL: pandorabox
-   IRC_USERNAME: pandorabot
+   IRC_CHANNEL: damocles
+   IRC_USERNAME: damoclesbot
 
  webmail:
   image: registry.rudin.io/x86/minetest-webmail
