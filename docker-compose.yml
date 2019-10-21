@@ -75,6 +75,14 @@ services:
    PGPASSWORD: enter
    PGPORT: 5432
 
+ beerchat-proxy:
+  image: registry.rudin.io/x86/beerchat_proxy:latest
+  restart: always
+  environment:
+   IRC_HOST: chat.freenode.net
+   IRC_CHANNEL: pandorabox
+   IRC_USERNAME: pandorabot
+
  webmail:
   image: registry.rudin.io/x86/minetest-webmail
   restart: always
