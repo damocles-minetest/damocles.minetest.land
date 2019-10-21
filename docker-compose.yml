@@ -61,6 +61,20 @@ services:
    options:
     max-size: 50m
 
+ highscore:
+  image: registry.rudin.io/x86/minetest-xp-highscore
+  restart: always
+  volumes:
+   - "./data/minetest/world:/data/world:ro"
+  depends_on:
+   - postgres
+  environment:
+   PGHOST: postgres
+   PGUSER: postgres
+   PGDATABASE: minetest
+   PGPASSWORD: enter
+   PGPORT: 5432
+
 
  nginx:
   image: nginx
