@@ -89,6 +89,12 @@ services:
   depends_on:
    - minetest
 
+ schembrowser:
+  image: filebrowser/filebrowser
+  volumes:
+   - "./data/minetest/world/schems:/srv"
+   - "./data/schembrowser.db:/database.db"
+   - "./data/schembrowser.json:/.filebrowser.json"
 
  nginx:
   image: nginx
@@ -101,6 +107,7 @@ services:
    - wiki
    - webmail
    - highscore
+   - schembrowser
   environment:
    VIRTUAL_PORT: 80
    VIRTUAL_HOST: damocles.minetest.land
