@@ -5,7 +5,7 @@ services:
   image: registry.rudin.io/x86/minetest:5.1.0-pandora
   restart: always
   ports:
-   - "30002:30000/udp"
+   - "30002:30002/udp"
   depends_on:
    - "postgres"
   volumes:
