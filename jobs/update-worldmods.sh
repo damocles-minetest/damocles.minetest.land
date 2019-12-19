@@ -1,22 +1,29 @@
 #!/bin/sh
 
+#!/bin/sh
+
 cd $(dirname $0)
 cd ../data/minetest/world/worldmods
 
-git remote update
-git diff --exit-code HEAD origin/master && exit 0
+while `true`
+do
+	sleep 60
 
-git pull
+	git remote update
+	git diff --exit-code HEAD origin/master && continue
 
-# new mods
-git submodule init
+	git pull
 
-# changed repo urls
-git submodule sync
+	# new mods
+	git submodule init
 
-# updated commits
-git submodule update
+	# changed repo urls
+	git submodule sync
 
-# removed directories
-git clean -dff
+	# updated commits
+	git submodule update
+
+	# removed directories
+	git clean -dff
+done
 

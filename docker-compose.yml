@@ -2,7 +2,7 @@ version: "2"
 
 services:
  minetest:
-  image: registry.rudin.io/x86/minetest:5.1.0-pandora
+  image: buckaroobanzay/minetest:pandorabox
   restart: always
   ports:
    - "30002:30002/udp"
@@ -30,11 +30,11 @@ services:
     max-size: 50m
 
  auth-proxy:
-  image: registry.rudin.io/x86/mt-auth-proxy:latest
+  image: minetestauth/minetest-auth-proxy
   restart: always
 
  wiki:
-  image: registry.rudin.io/x86/php-pandorabox
+  image: buckaroobanzay/php
   restart: always
   depends_on:
    - "postgres"
@@ -46,7 +46,7 @@ services:
     max-size: 50m
 
  mapserver:
-  image: registry.rudin.io/x86/mapserver
+  image: minetestmapserver/mapserver:latest
   restart: always
   networks:
    - default
@@ -76,15 +76,13 @@ services:
    PGPORT: 5432
 
  beerchat-proxy:
-  image: registry.rudin.io/x86/beerchat_proxy:latest
+  image: beerchat/beerchat
   restart: always
-  environment:
-   IRC_HOST: chat.freenode.net
-   IRC_CHANNEL: damocles
-   IRC_USERNAME: damoclesbot
+  volumes:
+   - "./data/beerchat.json:/data/beerchat.json:ro"
 
  webmail:
-  image: registry.rudin.io/x86/minetest-webmail
+  image: minetestmail/mail
   restart: always
   depends_on:
    - minetest
@@ -95,6 +93,17 @@ services:
    - "./data/minetest/world/schems:/srv"
    - "./data/schembrowser.db:/database.db"
    - "./data/schembrowser.json:/.filebrowser.json"
+
+ worldmodupdater:
+  image: alpine/git
+  restart: always
+  volumes:
+   - "./:/project"
+   - "/root/.ssh:/root/.ssh"
+  entrypoint: "/project/jobs/update-worldmods.sh"
+  logging:
+   options:
+    max-size: 50m
 
  nginx:
   image: nginx
