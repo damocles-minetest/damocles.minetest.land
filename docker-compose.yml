@@ -94,13 +94,17 @@ services:
    - "./data/schembrowser.db:/database.db"
    - "./data/schembrowser.json:/.filebrowser.json"
 
- worldmodupdater:
-  image: alpine/git
+ manager:
+  image: buckaroobanzay/minetest_manager
   restart: always
   volumes:
-   - "./:/project"
-   - "/root/.ssh:/root/.ssh"
-  entrypoint: "/project/jobs/update-worldmods.sh"
+   - "./data:/data"
+  environment:
+   - WORLDMODS_DIR=/data/minetest/world/worldmods
+   - WORLDMODS_BRANCH=master
+   - MEDIADIR=/data/nginx/html/media
+   - DEBUG_LOG=/data/minetest/debug.txt
+   - ERROR_LOG_OUTPUT=/data/nginx/html/error-log.txt
   logging:
    options:
     max-size: 50m
