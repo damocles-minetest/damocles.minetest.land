@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 
 services:
  minetest:
@@ -141,5 +141,3 @@ services:
 networks:
  terminator:
   external: true
-
- 
