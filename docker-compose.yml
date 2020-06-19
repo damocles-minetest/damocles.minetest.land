@@ -40,7 +40,10 @@ services:
    - "postgres"
    - "auth-proxy"
   volumes:
-   - "./data/wiki:/var/www/html"
+   - "./data/wiki/extensions:/var/www/html/extensions"
+   - "./data/wiki/images:/var/www/html/images"
+   - "./data/wiki/LocalSettings.php:/var/www/html/LocalSettings.php"
+
   logging:
    options:
     max-size: 50m
