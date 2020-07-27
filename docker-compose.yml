@@ -2,7 +2,7 @@ version: "2.1"
 
 services:
  minetest:
-  image: buckaroobanzay/minetest:5.2.0-r1
+  image: buckaroobanzay/minetest:5.3.0-r2
   restart: always
   ports:
    - "30002:30002/udp"
