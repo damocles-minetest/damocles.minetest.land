@@ -111,6 +111,18 @@ services:
    options:
     max-size: 50m
 
+ nodered:
+  image: nodered/node-red:1.1.2-12
+  restart: always
+  environment:
+  - TZ=Europe/Zurich
+  volumes:
+   - "./data/nodered:/data"
+   - "./data/minetest/world:/minetest"
+  logging:
+   options:
+    max-size: 50m
+
  nginx:
   image: nginx
   networks:
@@ -122,6 +134,7 @@ services:
    - wiki
    - webmail
    - highscore
+   - nodered
   environment:
    VIRTUAL_PORT: 80
    VIRTUAL_HOST: damocles.minetest.land
