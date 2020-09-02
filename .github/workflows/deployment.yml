@@ -24,4 +24,4 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
         ssh-keyscan damocles.minetest.land >> ~/.ssh/known_hosts
         # execute commands
-        ssh root@damocles.minetest.land "cd /data/damocles.minetest.land && docker-compose pull && docker-compose up -d && docker image prune -af"
+        ssh root@damocles.minetest.land "cd /data/damocles.minetest.land && git pull && docker-compose pull && docker-compose up -d && docker image prune -af"
