@@ -1,0 +1,22 @@
+name: deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: update compose deployment
+      run: |
+        eval $(ssh-agent -s)
+        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        touch ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+        ssh-keyscan damocles.minetest.land >> ~/.ssh/known_hosts
+        ssh root@damocles.minetest.land "cd /data/damocles.minetest.land && docker-compose pull && docker-compose up -d && docker image prune -af"
