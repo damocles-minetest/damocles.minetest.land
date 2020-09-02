@@ -1,6 +1,7 @@
 name: deployment
 
 on:
+  repository_dispatch:
   push:
     branches:
       - master
