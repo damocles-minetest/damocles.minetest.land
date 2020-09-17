@@ -64,22 +64,6 @@ services:
    options:
     max-size: 50m
 
- highscore:
-  image: buckaroobanzay/xphighscore
-  restart: always
-  volumes:
-   - "./data/minetest/world:/data/world:ro"
-  labels:
-   com.centurylinklabs.watchtower.enable: "true"
-  depends_on:
-   - postgres
-  environment:
-   PGHOST: postgres
-   PGUSER: postgres
-   PGDATABASE: minetest
-   PGPASSWORD: enter
-   PGPORT: 5432
-
  beerchat-proxy:
   image: beerchat/beerchat
   restart: always
