@@ -18,11 +18,15 @@ jobs:
         sudo ansible-galaxy collection install community.general
 
     - name: update deployment
-      uses: dawidd6/action-ansible-playbook@v2
-      with:
-        playbook: deploy.yml
-        directory: ./
-        key: ${{secrets.SSH_PRIVATE_KEY}}
-        inventory: |
-          [all]
-          damocles.minetest.land
+      run: |
+        # validate config
+        docker-compose config -q
+        # set up ssh
+        eval $(ssh-agent -s)
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        touch ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+        ssh-keyscan pandorabox.io >> ~/.ssh/known_hosts
+        ansible-playbook -i damocles.minetest.land, deploy.yml
