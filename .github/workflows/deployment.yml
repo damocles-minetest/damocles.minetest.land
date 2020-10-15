@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    - name: install deps
+      run: |
+        apt install ansible
+        ansible-galaxy collection install community.general
+
     - name: update deployment
       uses: dawidd6/action-ansible-playbook@v2
       with:
