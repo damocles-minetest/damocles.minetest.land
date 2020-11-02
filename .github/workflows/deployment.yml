@@ -23,8 +23,5 @@ jobs:
         touch ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
         ssh-keyscan pandorabox.io >> ~/.ssh/known_hosts
-        # execute commands
-        # pull git repo
-        ssh root@pandorabox.io "cd /data/damocles.minetest.land && git pull"
-        # update compose
-        ssh root@pandorabox.io "cd /data/damocles.minetest.land && docker-compose pull && docker-compose up -d && docker image prune -af"
+        # execute deployment script
+        cat scripts/deploy.sh | ssh root@pandorabox.io "cd /data/damocles.minetest.land && /bin/sh -"
