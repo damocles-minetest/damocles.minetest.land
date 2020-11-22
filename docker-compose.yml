@@ -70,7 +70,7 @@ services:
   labels:
    com.centurylinklabs.watchtower.enable: "true"
   volumes:
-   - "./data/beerchat.json:/data/beerchat.json:ro"
+   - "./data/beerchat.js:/data/beerchat.js:ro"
 
  webmail:
   image: minetestmail/mail
