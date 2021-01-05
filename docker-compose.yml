@@ -73,7 +73,7 @@ services:
    - "./data/beerchat.js:/data/beerchat.js:ro"
 
  webmail:
-  image: minetestmail/mail:1.1
+  image: minetestmail/mail:1.2
   restart: always
   labels:
    com.centurylinklabs.watchtower.enable: "true"
