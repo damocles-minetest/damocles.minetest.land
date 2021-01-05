@@ -30,7 +30,7 @@ services:
     max-size: 50m
 
  auth-proxy:
-  image: minetestauth/minetest-auth-proxy
+  image: minetestauth/minetest-auth-proxy:1.0
   restart: always
 
  wiki:
@@ -49,7 +49,7 @@ services:
     max-size: 50m
 
  mapserver:
-  image: minetestmapserver/mapserver:latest
+  image: minetestmapserver/mapserver:4.2
   restart: always
   networks:
    - default
@@ -65,7 +65,7 @@ services:
     max-size: 50m
 
  beerchat-proxy:
-  image: beerchat/beerchat
+  image: beerchat/beerchat:1.0
   restart: always
   labels:
    com.centurylinklabs.watchtower.enable: "true"
@@ -73,7 +73,7 @@ services:
    - "./data/beerchat.js:/data/beerchat.js:ro"
 
  webmail:
-  image: minetestmail/mail
+  image: minetestmail/mail:1.1
   restart: always
   labels:
    com.centurylinklabs.watchtower.enable: "true"
