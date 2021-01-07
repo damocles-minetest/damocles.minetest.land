@@ -49,7 +49,7 @@ services:
     max-size: 50m
 
  mapserver:
-  image: minetestmapserver/mapserver:4.2
+  image: minetestmapserver/mapserver:4.3
   restart: always
   networks:
    - default
