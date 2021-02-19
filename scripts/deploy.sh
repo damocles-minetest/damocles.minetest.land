@@ -8,7 +8,7 @@ git pull
 docker-compose pull auth-proxy beerchat-proxy mapserver wiki highscore webmail manager
 
 # update deployment
-docker-compose up -d
+docker-compose up -d --remove-orphans
 
 # cleanup old/stale images
 docker image prune -af
