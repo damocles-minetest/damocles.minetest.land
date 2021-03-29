@@ -2,7 +2,7 @@ version: "2.1"
 
 services:
  damocles-minetest:
-  image: buckaroobanzay/minetest:5.4.0-dev-r4
+  image: buckaroobanzay/minetest:5.4.0-r2
   restart: always
   networks:
    - terminator
