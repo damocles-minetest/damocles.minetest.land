@@ -127,6 +127,13 @@ services:
    VIRTUAL_HOST: damocles.minetest.land
    LETSENCRYPT_HOST: damocles.minetest.land
    LETSENCRYPT_EMAIL: thomas@rudin.io
+  labels:
+    - "traefik.enable=true"
+    - "traefik.docker.network=terminator"
+    - "traefik.http.routers.damocles.rule=Host(`damocles.minetest.land`)"
+    - "traefik.http.services.damocles.loadbalancer.server.port=80"
+    - "traefik.http.routers.damocles.entrypoints=websecure"
+    - "traefik.http.routers.damocles.tls.certresolver=default"
   volumes:
    - "./data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
    - "./data/nginx/htpasswd:/etc/nginx/htpasswd:ro"
