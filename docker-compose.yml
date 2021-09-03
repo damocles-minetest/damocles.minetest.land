@@ -33,7 +33,7 @@ services:
     max-size: 50m
 
  auth-proxy:
-  image: minetestauth/minetest-auth-proxy:1.1
+  image: minetestauth/minetest-auth-proxy:1.2
   restart: always
 
  wiki:
