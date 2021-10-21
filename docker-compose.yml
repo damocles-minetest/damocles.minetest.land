@@ -99,7 +99,7 @@ services:
     max-size: 50m
 
  nodered:
-  image: nodered/node-red:2.0.6-12-minimal
+  image: nodered/node-red:2.1.0-12-minimal
   restart: always
   environment:
   - TZ=Europe/Zurich
