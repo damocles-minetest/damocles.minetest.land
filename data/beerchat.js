@@ -2,7 +2,7 @@ module.exports = {
 	"remotes": [{
 		"name": "IRC",
 		"type": "irc",
-		"host": "chat.freenode.net",
+		"host": "irc.libera.chat",
 		"username": "damoclesbot",
 		"password": process.env.BEERCHAT_IRC_PASSWORD,
 		"debug": false,
