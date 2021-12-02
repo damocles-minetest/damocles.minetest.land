@@ -1,0 +1,18 @@
+---
+- hosts: all
+  remote_user: root
+  vars:
+    compose_directory: /data/damocles.minetest.land
+  tasks:
+    - name: Checkout git master
+      ansible.builtin.git:
+        repo: https://github.com/damocles-minetest/damocles.minetest.land
+        dest: "{{ compose_directory }}"
+        single_branch: yes
+        version: master
+    - name: Create and start services
+      community.general.docker_compose:
+        project_src: "{{ compose_directory }}"
+        pull: yes
+        build: yes
+        remove_orphans: yes
