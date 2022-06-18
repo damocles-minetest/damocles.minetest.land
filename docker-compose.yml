@@ -68,7 +68,7 @@ services:
     max-size: 50m
 
  beerchat-proxy:
-  image: beerchat/beerchat:1.1
+  image: beerchat/beerchat:1.5
   restart: always
   labels:
    com.centurylinklabs.watchtower.enable: "true"
